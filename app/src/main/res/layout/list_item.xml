@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+<!--    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/item_foto"
+        android:src="@drawable/person"/>-->
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/repositorio_image"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:src="@drawable/person"
+        android:background="#00A8EC" />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/item_nome_repositorio"
+            android:text="nome repositorio"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/item_nome"
+            android:text="nome"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/item_descricao"
+            android:text="descricao"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/item_username"
+            android:text="username"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_forks"
+            android:text="0 forks"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingTop="35dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_stars"
+            android:text="0 stars"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingTop="35dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
