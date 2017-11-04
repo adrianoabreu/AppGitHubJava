@@ -1,9 +1,16 @@
 package br.com.nexas.appgithubjava.retrofit;
 
+import android.util.Log;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
 import br.com.nexas.appgithubjava.service.RepositorioService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 /**
@@ -12,23 +19,29 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class RepositorioRetrofit {
 
-    private final Retrofit retrofit;
-    private static final String BASE_URL = "https://api.github.com";
-    public RepositorioRetrofit(){
+    private static Retrofit retrofit = null;
+    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    OkHttpClient.Builder client = new OkHttpClient.Builder();
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    public RepositorioRetrofit() {
+
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.addInterceptor(interceptor);
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(JacksonConverterFactory.create())
-                .client(client.build())
-                .build();
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public RepositorioService getRepositorioService(){
-        return retrofit.create(RepositorioService.class);
+    public static Retrofit getClient(String baseUrl) {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create())
+//                    .client(client)
+                    .build();
+            Log.i("RETROFIT", "Acessou Retrofit ");
+        }
+        return retrofit;
     }
+
+
 }
