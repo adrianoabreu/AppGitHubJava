@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.nexas.appgithubjava.adapter.RepositorioAdapter;
+import br.com.nexas.appgithubjava.dao.RepositorioDAO;
 import br.com.nexas.appgithubjava.dto.RepositorioDTO;
 import br.com.nexas.appgithubjava.modelo.Repositorio;
 import br.com.nexas.appgithubjava.retrofit.ApiUtils;
@@ -101,7 +102,6 @@ public class ListaRepositoriosActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RepositorioDTO> call, Response<RepositorioDTO> response) {
                 if (response.isSuccessful()){
-
                     adapter.addAll(response.body().getRepositorios());
                     Log.i("onResponse chamado", "onResponse chamado com sucesso ");
                 }
@@ -110,6 +110,8 @@ public class ListaRepositoriosActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<RepositorioDTO> call, Throwable t) {
                 Log.e("onFailure chamado: ", t.getMessage());
+                RepositorioDAO dao = new RepositorioDAO(ListaRepositoriosActivity.this);
+                adapter.addAll(dao.selecionaTodosOsRepositorios());
             }
         });
 

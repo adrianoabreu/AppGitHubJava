@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.com.nexas.appgithubjava.R;
+import br.com.nexas.appgithubjava.dao.RepositorioDAO;
 import br.com.nexas.appgithubjava.modelo.Repositorio;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,6 +44,7 @@ public class RepositorioAdapter extends RecyclerView.Adapter<RepositorioAdapter.
         //public SmartImageView imgAuthorPicture;
         public CircleImageView imgAuthorPicture;
         RepositorioListener repositorioListener;
+
 
         public ViewHolder(View itemView, RepositorioListener repositorioListener) {
             super(itemView);
@@ -132,9 +134,19 @@ public class RepositorioAdapter extends RecyclerView.Adapter<RepositorioAdapter.
     }
 
     public void addAll(List<Repositorio> repositories) {
+        RepositorioDAO dao = new RepositorioDAO(this.context);
         for (Repositorio repo : repositories) {
-            add(repo);
+            //add(repo);
+            if(!dao.existe(repo)){
+                add(repo);
+                dao.insere(repo);
+            }else{
+                add(dao.selecionaRepositorioDaBase(repo));
+
+            }
+
         }
+        dao.close();
     }
 
     public List<Repositorio> getRepositories() {
